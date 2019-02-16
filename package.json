@@ -1,0 +1,96 @@
+{
+	"publisher": "obfu5c8",
+	"name": "writer",
+	"displayName": "Writer",
+	"description": "Manage multi-page markdown wikis straight from vscode",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.31.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*",
+		"onView:explorer"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [{
+				"id": "writer",
+				"title": "Writer",
+				"icon": "resources/actionbar-icon.svg"
+				}
+			]
+		},
+		"views": {
+			"writer": [{
+				"id": "writer.table-of-contents",
+				"name": "Table of Contents"
+				}
+			]
+		},
+		"menus": {
+			"view/item/context": [{
+					"command": "wiki-writer.create-subsection-in-new-file",
+					"when": "view == writer.table-of-contents && viewItem == document"
+				},{
+					"command": "wiki-writer.delete-section",
+					"when": "view == writer.table-of-contents && viewItem == document"
+				},{
+					"command": "wiki-writer.move-subsection-to-new-file",
+					"when": "view == writer.table-of-contents && viewItem == section"
+				}
+			],
+			"view/title": [{
+					"command": "wiki-writer.create-subsection-in-new-file",
+					"when": "view == writer.table-of-contents",
+					"group": "navigation"
+				},{
+					"command": "wiki-writer.create-subsection-in-new-file",
+					"when": "view == writer.table-of-contents"
+				},{
+					"command": "wiki-writer.create-subsection-in-new-file",
+					"when": "view == writer.table-of-contents"
+				}
+			]
+
+		},
+		"commands": [
+			{
+				"command": "wiki-writer.create-subsection-in-new-file",
+				"title": "Add new subsection",
+				"icon": "resources/wiki-icon.svg"
+			},
+			{
+				"command": "wiki-writer.move-subsection-to-new-file",
+				"title": "Move to own file"
+			},
+			{
+				"command": "wiki-writer.delete-section",
+				"title": "Delete section"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^5.0.5",
+		"@types/markdown-it": "0.0.7",
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^10.12.21",
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28"
+	},
+	"dependencies": {
+		"fs-extra": "^7.0.1",
+		"markdown-it": "^8.4.2"
+	}
+}
